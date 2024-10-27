@@ -3,7 +3,7 @@
 $host = "nattavipolbo.ddns.net:3306";
 $user = "root";
 $pass = "Riwji5588";
-$db = "lab_db_10";
+$db = "project_db";
 
 $conn = mysqli_connect($host, $user, $pass, $db);
 
@@ -13,29 +13,25 @@ if (!$conn) {
     exit();
 }
 
-    $job_id = $_POST['job_id'];
-    $job_title = $_POST['job_title'];
-    $min_salary = $_POST['min_salary'];
-    $max_salary = $_POST['max_salary'];
-    $query = "INSERT INTO jobs (job_id, job_title, min_salary, max_salary) VALUES ('$job_id', '$job_title', '$min_salary', '$max_salary')";
-    $result = mysqli_query($conn, $query);
-    if ($result) {
-        echo json_encode([
-            "status" => true,
-            "message" => "Data inserted successfully",
-            "job_id" => $job_id,
-            "job_title" => $job_title,
-            "min_salary" => $min_salary,
-            "max_salary" => $max_salary
-        ]);
-        
-    } else {
-        echo json_encode([
-            "error" => "SQL error: " . mysqli_error($conn),
-            "query" => $query
-        ]);
-    }
-    
-    mysqli_close($conn);
+// $job_id = $_POST['job_id'];
+$Restaurant_Name = $_POST['Restaurant_Name'];
+$Restaurant_address = $_POST['Restaurant_address'];
+$Restaurant_phone_number = $_POST['Restaurant_phone_number'];
+$query = "INSERT INTO restaurants (user_id ,name, address, phone_number , status , rating) VALUES (1 ,'$Restaurant_Name', '$Restaurant_address', '$Restaurant_phone_number' , 1 , 0)";
+$result = mysqli_query($conn, $query);
+if ($result) {
+    echo json_encode([
+        "status" => true,
+        "message" => "Data inserted successfully",
+    ]);
+
+} else {
+    echo json_encode([
+        "error" => "SQL error: " . mysqli_error($conn),
+        "query" => $query
+    ]);
+}
+
+mysqli_close($conn);
 
 ?>
